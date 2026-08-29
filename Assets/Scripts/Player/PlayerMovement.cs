@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -32,13 +33,25 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void FixedUpdate()
     {
         //read movement
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
-        Vector3 moveOutput = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.fixedDeltaTime;
-        rb.Move(transform.position + moveOutput, transform.rotation);
+        Vector3 NormalizedInput = Vector3.Normalize(new Vector3(moveInput.x, 0, moveInput.y));
+        Vector3 moveOutput = NormalizedInput * moveSpeed * Time.fixedDeltaTime;
+
+        if(moveInput.sqrMagnitude > 0)
+        {
+            //calculate rotation
+            Quaternion targetRotation = Quaternion.LookRotation(NormalizedInput, Vector3.up);
+            //rotate player
+            rb.MoveRotation(targetRotation);
+        }
+
+        //make player move
+        rb.MovePosition(transform.position + moveOutput);
+
     }
 }
