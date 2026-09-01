@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private PlayerRotation playerRotation;
+    [SerializeField] private Animator animator;
     private PlayerInputActions playerActions;
 
     private InputAction moveAction;
@@ -24,17 +26,6 @@ public class PlayerMovement : MonoBehaviour
     {
         playerActions.Disable();
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void FixedUpdate()
     {
         //read movement
@@ -44,14 +35,16 @@ public class PlayerMovement : MonoBehaviour
 
         if(moveInput.sqrMagnitude > 0)
         {
-            //calculate rotation
-            Quaternion targetRotation = Quaternion.LookRotation(NormalizedInput, Vector3.up);
-            //rotate player
-            rb.MoveRotation(targetRotation);
+            playerRotation.RotateTowards(NormalizedInput);
         }
+
+        //set isMoving variable in the animator
+        bool isMoving = moveInput.sqrMagnitude > 0;
+        animator.SetBool("isMoving", isMoving);
 
         //make player move
         rb.MovePosition(transform.position + moveOutput);
+
 
     }
 }
