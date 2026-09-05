@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    [SerializeField] Collider hitbox;
+    public List<Collider> listHurtbox;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,9 +18,11 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Hurtbox>() != null)
+        if (other.GetComponent<Hurtbox>() != null && !listHurtbox.Contains(other))
         {
+            listHurtbox.Add(other);
             Debug.Log("entering hurtbox collider");
+            other.GetComponentInParent<Health>().TakeDamage(10);
         }
     }
 

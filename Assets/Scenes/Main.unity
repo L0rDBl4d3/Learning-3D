@@ -1767,6 +1767,7 @@ GameObject:
   - component: {fileID: 330086680}
   - component: {fileID: 330086683}
   - component: {fileID: 330086684}
+  - component: {fileID: 330086685}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1871,6 +1872,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 330086680}
+--- !u!114 &330086685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330086679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4744b9786a4e419458014d552a145ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitbox: {fileID: 745664224}
 --- !u!4 &430757235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dbe4191aa8a702544aef194689f1c4d2, type: 3}
@@ -2094,7 +2108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &745664225
 Transform:
   m_ObjectHideFlags: 0
@@ -2122,7 +2136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6b4c9f980cfd843bda69f580a684b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 0}
+  listHurtbox: []
 --- !u!135 &745664227
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2528,6 +2542,7 @@ GameObject:
   - component: {fileID: 1931836986}
   - component: {fileID: 1931836985}
   - component: {fileID: 1931836984}
+  - component: {fileID: 1931836989}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2654,6 +2669,19 @@ Transform:
   - {fileID: 1425990034}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1931836989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931836983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b25b7e6ec19e3541b4db06fe303d327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &1993419457
 GameObject:
   m_ObjectHideFlags: 0
