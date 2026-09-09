@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -8,5 +9,11 @@ public class Health : MonoBehaviour
     {
         health -= damage;
         Debug.Log("perdiste: " + damage + " de hp, te quedan " + health + ".");
+        if (health <= 0) Death();
+    }
+
+    private void Death()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -1,11 +1,11 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-public class HitboxTest : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject hitbox;
     [SerializeField] private bool isAttacking;
+    [SerializeField] private Animator animator;
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking)
@@ -17,6 +17,8 @@ public class HitboxTest : MonoBehaviour
     private IEnumerator Attack()
     {
         Debug.Log("ATAQUE INICIO");
+
+        animator.SetTrigger("Attack");
 
         isAttacking = true;
         hitbox.GetComponent<Hitbox>().listHurtbox.Clear();
