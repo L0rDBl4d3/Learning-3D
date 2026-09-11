@@ -4,6 +4,11 @@ using UnityEngine;
 public class Hitbox : MonoBehaviour
 {
     public List<Collider> listHurtbox;
+    [SerializeField] private Transform Dagger;
+    private void Update()
+    {
+        transform.position = Dagger.position;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Hurtbox>() != null && !listHurtbox.Contains(other))

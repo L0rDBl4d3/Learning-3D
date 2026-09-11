@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerRotation playerRotation;
     [SerializeField] private Animator animator;
+    [SerializeField] private PlayerAttack playerAttack;
     private PlayerInputActions playerActions;
 
     private InputAction moveAction;
@@ -38,8 +39,15 @@ public class PlayerMovement : MonoBehaviour
             playerRotation.RotateTowards(NormalizedInput);
         }
 
+        if (playerAttack.isAttacking)
+        {
+            animator.SetBool("isMoving", false);
+            return;
+        }
+
         //set isMoving variable in the animator
-        bool isMoving = moveInput.sqrMagnitude > 0;
+        bool isMoving = moveInput.sqrMagnitude > 0;        
+
         animator.SetBool("isMoving", isMoving);
 
         //make player move
