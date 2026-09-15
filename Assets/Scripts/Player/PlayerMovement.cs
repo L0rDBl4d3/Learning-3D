@@ -1,40 +1,49 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private PlayerRotation playerRotation;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerAttack playerAttack;
-    private PlayerInputActions playerActions;
-
+    [SerializeField] private PlayerInput playerInput;
+    private Vector2 moveInput;
+    private Vector3 NormalizedInput;
+    private Vector3 moveOutput;
     private InputAction moveAction;
     private void Awake()
     {
-        playerActions = new PlayerInputActions();
-        moveAction = playerActions.Player.Move;
+        if (playerInput != null && playerInput.actions != null)
+        {
+            moveAction = playerInput.actions["Move"];
+        }
     }
     private void OnEnable()
     {
-        playerActions.Enable();
+        if (playerInput != null && playerInput.actions != null)
+        {
+            moveAction.Enable();
+        }
     }
     private void OnDisable()
     {
-        playerActions.Disable();
+        if (playerInput != null && playerInput.actions != null)
+        {
+            moveAction.Disable();
+        }
+    }
+    public void OnMove(InputValue value) { 
+        //read movement
+        moveInput = value.Get<Vector2>();
+        NormalizedInput = Vector3.Normalize(new Vector3(moveInput.x, 0, moveInput.y));
+        moveOutput = NormalizedInput * moveSpeed * Time.fixedDeltaTime;
     }
     private void FixedUpdate()
     {
-        //read movement
-        Vector2 moveInput = moveAction.ReadValue<Vector2>();
-        Vector3 NormalizedInput = Vector3.Normalize(new Vector3(moveInput.x, 0, moveInput.y));
-        Vector3 moveOutput = NormalizedInput * moveSpeed * Time.fixedDeltaTime;
-
-        if(moveInput.sqrMagnitude > 0)
+        if (moveInput.sqrMagnitude > 0)
         {
             playerRotation.RotateTowards(NormalizedInput);
         }
@@ -46,13 +55,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //set isMoving variable in the animator
-        bool isMoving = moveInput.sqrMagnitude > 0;        
+        bool isMoving = moveInput.sqrMagnitude > 0;
 
         animator.SetBool("isMoving", isMoving);
-
         //make player move
         rb.MovePosition(transform.position + moveOutput);
-
-
     }
+
 }

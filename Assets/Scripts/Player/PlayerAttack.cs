@@ -1,23 +1,45 @@
-using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject hitbox;
-    public bool isAttacking { get; private set; }
     [SerializeField] private Animator animator;
+    [SerializeField] private PlayerInput playerInput;
+    public bool isAttacking { get; private set; }
     private bool canCombo = false;
-    private void Update()
+
+    private InputAction attackAction;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (playerInput != null && playerInput.actions != null)
         {
-            if(!isAttacking) Attack();
-            else if (canCombo) Attack();
-        } 
+            attackAction = playerInput.actions["Attack"];
+            Debug.Log("Assigning attack action");
+        }
     }
 
-    private void Attack()
+    private void OnEnable()
     {
+        if (playerInput != null && playerInput.actions != null)
+        {
+            attackAction.Enable();
+            attackAction.started += Attack;
+        }
+    }
+    private void OnDisable()
+    {
+        if (playerInput != null && playerInput.actions != null)
+        {
+            attackAction.Disable();
+            attackAction.started -= Attack;
+        }
+    }
+
+    private void Attack(InputAction.CallbackContext ctx)
+    {
+        if (isAttacking && !canCombo) return;
         Debug.Log("ATAQUE INICIO");
 
         animator.SetTrigger("Attack");

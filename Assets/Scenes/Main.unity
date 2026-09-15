@@ -1519,6 +1519,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: dbe4191aa8a702544aef194689f1c4d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1995941826}
+    - targetCorrespondingSourceObject: {fileID: 3516384815206211865, guid: dbe4191aa8a702544aef194689f1c4d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1003026911}
   m_SourcePrefab: {fileID: 100100000, guid: dbe4191aa8a702544aef194689f1c4d2, type: 3}
 --- !u!1 &132760432
 GameObject:
@@ -1776,9 +1779,12 @@ GameObject:
   - component: {fileID: 330086682}
   - component: {fileID: 330086681}
   - component: {fileID: 330086680}
+  - component: {fileID: 330086688}
   - component: {fileID: 330086683}
   - component: {fileID: 330086684}
   - component: {fileID: 330086685}
+  - component: {fileID: 330086686}
+  - component: {fileID: 330086687}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1871,6 +1877,7 @@ MonoBehaviour:
   playerRotation: {fileID: 330086684}
   animator: {fileID: 1995941825}
   playerAttack: {fileID: 330086685}
+  playerInput: {fileID: 330086688}
 --- !u!114 &330086684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1898,6 +1905,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitbox: {fileID: 745664224}
   animator: {fileID: 1995941825}
+  playerInput: {fileID: 330086688}
+--- !u!114 &330086686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330086679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70d2afbd7f1d0c42b576edf30d1bd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 330086688}
+--- !u!114 &330086687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330086679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b25b7e6ec19e3541b4db06fe303d327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+--- !u!114 &330086688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330086679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 5a486e0557ccf0041a80af8ee309f74a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7a634d94-48d6-417a-83e0-6edc5f034ec6
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b631e43d-752a-4504-9561-0d67d693ba3f
+    m_ActionName: 'Player/Attack[/Mouse/leftButton,/Keyboard/j]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8d4f6512-7793-4ee9-b5dd-405941d4c050
+    m_ActionName: 'Player/Dodge[/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1db17904-9d16-4991-981e-2f72ebacbb00
+    m_ActionName: 'Player/Block[/Mouse/rightButton,/Keyboard/l]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!4 &430757235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: dbe4191aa8a702544aef194689f1c4d2, type: 3}
@@ -2269,6 +2349,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 949442542}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1003026909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3516384815206211865, guid: dbe4191aa8a702544aef194689f1c4d2, type: 3}
+  m_PrefabInstance: {fileID: 118734628}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1003026911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003026909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70d2afbd7f1d0c42b576edf30d1bd17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInput: {fileID: 0}
 --- !u!1 &1224869193
 GameObject:
   m_ObjectHideFlags: 0
