@@ -1,3 +1,6 @@
+using NUnit.Framework.Internal;
+using System.Collections;
+using Unity.InferenceEngine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,11 +9,13 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject hitbox;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerInput playerInput;
+    [SerializeField] private float counterAttackWindow;
+    [SerializeField] private bool canCounterAttack;
     public bool isAttacking { get; private set; }
     private bool canCombo = false;
 
     private InputAction attackAction;
-
+    private float attackDamage = 10f;
     private void Awake()
     {
         if (playerInput != null && playerInput.actions != null)
@@ -40,9 +45,18 @@ public class PlayerAttack : MonoBehaviour
     private void Attack(InputAction.CallbackContext ctx)
     {
         if (isAttacking && !canCombo) return;
-        Debug.Log("ATAQUE INICIO");
+        if (canCounterAttack)
+        {
+            //do special attack
+            //animator.SetTrigger("CounterAttack");
+            Debug.Log("CounterAttacking");
+        }else
+        {
 
-        animator.SetTrigger("Attack");
+            Debug.Log("ATAQUE INICIO");
+
+            animator.SetTrigger("Attack");
+        }
     }
 
     public void StartAttack()
@@ -60,12 +74,30 @@ public class PlayerAttack : MonoBehaviour
     {
         hitbox.SetActive(state);
 
-        if(state) canCombo = state;
-
-        Debug.Log("HITBOX: "+ (state ? "ACTIVO" : "INACTIVO"));
+        if (state)
+        {
+            canCombo = state;
+            SetDamage(attackDamage);
+        }
+        else SetDamage(0);
+        Debug.Log("HITBOX: " + (state ? "ACTIVO" : "INACTIVO"));
     }
     public void DisableCombo()
     {
-        canCombo = false;   
+        canCombo = false;
+    }
+    private void SetDamage(float dmg)
+    {
+        hitbox.GetComponent<Hitbox>().damage = dmg;
+    }
+    public void ActivateCounterAttack()
+    {
+        Debug.Log("Contra Ataque Activado");
+        canCounterAttack = true;
+        StartCoroutine(tres());
+    }
+    private IEnumerator tres(){ 
+        yield return new WaitForSeconds(counterAttackWindow);
+        canCounterAttack = false;
     }
 }

@@ -1,16 +1,14 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Hurtbox : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public UnityEvent OnHit;
 
-    // Update is called once per frame
-    void Update()
+    public void TriggerOnHit()
     {
-        
+        Debug.Log("On hit Event");
+        OnHit?.Invoke();
     }
 }

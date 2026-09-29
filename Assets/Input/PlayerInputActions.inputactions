@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "testAttack",
+                    "type": "Button",
+                    "id": "1b2d6748-a6b9-47c7-83e1-949fbca4c1ff",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -152,6 +161,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "e35ed661-24f3-4b0e-b3c5-b9f41f6c1e5b",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "testAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
